@@ -23,6 +23,11 @@ public class ThreadInfoMain {
     log("myThread.getPriority()= " + myThread.getPriority());
     log("myThread.getThreadGroup= " + myThread.getThreadGroup());
     log("myThread.getState()= " + myThread.getState());
+
+    myThread.start();
+
+    log("myThread.getState()= " + myThread.getState());
+
   }
 
 }
