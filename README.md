@@ -58,3 +58,5 @@
 인터럽트
 - waiting 상태의 스레드를 인터럽트를 통해서 깨울 수 있다. 깨워진 스레드는 runnable 상태가 된다. 
 - `interrupt()` 메서드로 호출 할 수 있다. 
+- `interrupt()` 가 호출되면 `isInterrupted` 상태가 `true`가 되는데, 별도의 처리가 없으면 이 상태가 계속 유지된다. 
+   - 이후애 interruptException을 발생시키는 메서드(예: sleep)를 만나면 예외가 발생한다. 
