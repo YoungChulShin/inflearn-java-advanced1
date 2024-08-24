@@ -60,3 +60,5 @@
 - `interrupt()` 메서드로 호출 할 수 있다. 
 - `interrupt()` 가 호출되면 `isInterrupted` 상태가 `true`가 되는데, 별도의 처리가 없으면 이 상태가 계속 유지된다. 
    - 이후애 interruptException을 발생시키는 메서드(예: sleep)를 만나면 예외가 발생한다. 
+- 대안으로 `interrupted()` 메서드를 호출하면, 상태가 인터럽트일 경우에 상태를 `false`로 변경해준다. 
+
