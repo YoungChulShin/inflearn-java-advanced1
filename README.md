@@ -62,3 +62,7 @@
    - 이후애 interruptException을 발생시키는 메서드(예: sleep)를 만나면 예외가 발생한다. 
 - 대안으로 `interrupted()` 메서드를 호출하면, 상태가 인터럽트일 경우에 상태를 `false`로 변경해준다. 
 
+yield
+- sleep을 사용하면 thread가 runnable -> timed_waiting 상태로 변경이 발생한다. 
+- yield를 사용하면 runnable 상태를 유지하면서, 스케쥴링 큐에 다시 대기하도록 할 수 있다. 
+- 잠깐 실행을 양보할 때에는 yield를 사용해서 처리할 수 있다. 일정 시간 양보하려면 sleep을 사용한다. 
