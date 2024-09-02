@@ -24,7 +24,7 @@ public class ThreadStopMainV4 {
       while (!Thread.interrupted()) {
         log("작업 중");
       }
-      log("work 스레드 인터럽트 상태2 = " + Thread.currentThread().isInterrupted());
+      log("wo rk 스레드 인터럽트 상태2 = " + Thread.currentThread().isInterrupted());
       log("자원 정리");
       log("정리 종료");
     }
