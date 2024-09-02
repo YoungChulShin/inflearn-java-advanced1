@@ -66,3 +66,23 @@ yield
 - sleep을 사용하면 thread가 runnable -> timed_waiting 상태로 변경이 발생한다. 
 - yield를 사용하면 runnable 상태를 유지하면서, 스케쥴링 큐에 다시 대기하도록 할 수 있다. 
 - 잠깐 실행을 양보할 때에는 yield를 사용해서 처리할 수 있다. 일정 시간 양보하려면 sleep을 사용한다. 
+
+## 메모리 가시성
+메모리 가시성
+- 멀티스레드에서 Cache에서 읽어오는 데이터에 의해서 각 스레드 사이에 데이터 동기화가 바로 안되는 문제
+
+메모리 동기화
+- Thread의 변경은 cache에 반영되는데 
+- cache의 변경 내용이 main memory에 반영되는 시점은 알 수 없다
+- 그리고 다른 thread에서 바라보는 cache에 main memory의 변경 사항이 반영되는 시점도 알 수 없다. 
+- 이로 인해서 각 스레드간에 참조하는 변수 값의 차이가 발생하는 것을 메모리 가시성 문제라고 한다. 
+- 보통 context switching이 발생할 때, 스레드의 작업을 백업해야하기 때문에 이때 main memory에 반영될 가능성이 높다. 
+
+Volatile
+- main memory를 항상 사용한다. 
+- cache 보다는 느리다는 문제가 있지만, 가시성 문제를 피할 수 있다. 
+
+Java Memory Model
+- happens-before
+   - 스레드간 작업 순서에 대한 내용
+   - A작업이 B작업보다 happens-before 관계에 있다면, A 작업의 변경 사항은 B 작업에서 볼 수 있다. 
