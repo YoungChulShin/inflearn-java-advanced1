@@ -113,4 +113,20 @@ LockSupport
    - parkNanos(nanos): 나노초 동안 timed_waiting 상태로 변경한다.
    - unpark(thread): waiting 상태의 스레드를 runnable 상태로 변경한다. 
 
+LockSupport를 이용하면 스레드를 waiting 상태로 변경하고, 일정 시간 또는 인터럽트를 통해서 깨울수 있기 때문에 Synchroized가 가지는 무한정 대기를 개선할 수 있다. 
 
+
+### Blocked, Waiting
+공통
+- 모두 스레드가 대기하는 상태
+- 실행 스케쥴링에 들어가지 않기 때문에 CPU 입장에서는 실행하지 않는 비슷한 상태.
+
+인터럽트
+- Blocked는 인터럽트가 걸려도 대기 상태를 나오지 못한다. 
+- Waiting, Timed_Watiing은 대기 상태를 빠져 나와서 Runnable로 변경된다. 
+
+용도
+- Blocked는 Synchroized에서 락을 획득하기 위해 대기할 때 사용된다. 
+- Waiting은 스레드가 특정 조건이나 시간 동안 대기할 때 발생하는 상태이다. 
+- Waiting: Thread.join(), LockSupport.park(), Object.wait()
+- Timed_Waiting: Thread.sleep, LockSupport.parkNanos, Thread.join(long millis), Object.wait(long timeout)
