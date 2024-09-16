@@ -130,3 +130,26 @@ LockSupport를 이용하면 스레드를 waiting 상태로 변경하고, 일정 
 - Waiting은 스레드가 특정 조건이나 시간 동안 대기할 때 발생하는 상태이다. 
 - Waiting: Thread.join(), LockSupport.park(), Object.wait()
 - Timed_Waiting: Thread.sleep, LockSupport.parkNanos, Thread.join(long millis), Object.wait(long timeout)
+
+
+### ReentrantLock
+Lock 인터페이스
+- 동시성 프로그래밍에서 쓰이는 안전한 임계 영역을 위한 락을 구현하는데 사용된다. 
+- 대표적인 구현체로 ReentrantLock이 있다. 
+- 메서드
+   - void lock()
+      - 락을 획득한다. 인터럽트로도 깨울 수 없다. 
+   - void lockInterruptibly()
+      - 락을 획득하는데, 인터럽트에 반응한다. 
+   - boolean tryLock()
+      - 락 획득을 시도한다. 다른 스레드가 사용 중이라면 false를 반환하고, 그렇지 않으면 락을 획득하고 true를 반환한다. 
+   - boolean tryLock(long time, TimeUnit unit)
+   - void unlock()
+      - 락을 해제한다. 
+      - 락을 획득한 스레드가 호출해야한다. 
+   - Condition newCondition()
+
+공정성
+- sychronized는 락이 돌아왔을 때, 어떤 스레드가 락을 획득할 지 알 수 없다. 
+- Lock 인터페이스는 스레드가 공정하게 락을 획득할 수 있는 모드는 제공한다. 
+- 공정모드는 내부적으로 순서보장을 하기 위해서 어느정도 성능이 떨어질 수 있다. 보통의 경우는 비공정 모드로 대응이 되는데, 꼭 순서 보장이 되어야한다면 공정 모드를 사용한다. 
