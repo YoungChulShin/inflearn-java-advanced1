@@ -102,3 +102,15 @@ synchronized
    - 자동 잠금 해제
 - 단점
    - 무한대기: 스레드의 락이 풀릴 때까지 무한 대기 한다. 타임아웃이나 인터럽트가 없다. 
+
+## 고급 동기화 - concurrentLock
+기존에 synchronized는 무한정 대기해야하는 불편함이 존재한다. 
+
+LockSupport
+- 스레드를 waiting 상태로 변경할 수 있다. 
+- 기능
+   - park(): 스레드를 waiting 상태로 변경.
+   - parkNanos(nanos): 나노초 동안 timed_waiting 상태로 변경한다.
+   - unpark(thread): waiting 상태의 스레드를 runnable 상태로 변경한다. 
+
+
