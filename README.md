@@ -153,3 +153,29 @@ Lock 인터페이스
 - sychronized는 락이 돌아왔을 때, 어떤 스레드가 락을 획득할 지 알 수 없다. 
 - Lock 인터페이스는 스레드가 공정하게 락을 획득할 수 있는 모드는 제공한다. 
 - 공정모드는 내부적으로 순서보장을 하기 위해서 어느정도 성능이 떨어질 수 있다. 보통의 경우는 비공정 모드로 대응이 되는데, 꼭 순서 보장이 되어야한다면 공정 모드를 사용한다. 
+
+## ExecutorService
+### Thread를 직접 생성할 때 문제점
+1. 리소스 측면
+   - 각 Thread는 개별 call stack을 가지기 때문에 메모리를 소모한다.
+   - 운영체제의 자원을 사용한다. (system call 실행)
+   - 운영체제 스케줄러 자원 사용
+2. Runnable Interface의 불편함
+   - 반환값이 없다
+   - 예외처리가 어렵다. (checkedException을 throw 할 수 없다)
+
+### Executor Interface
+구조
+- Executor interface
+   - Runnable을 받아서 실행한다. 
+   ```java
+   public interface Executor {
+      void execute(Runnable command);
+   }
+   ```
+- ExecutorService interface
+   - Executor를 상속한 인터페이스. 
+   - Executor보다 조금 더 많은 기능을 제공한다. 
+- ThreadPoolExecutor class 
+   - ExecutorService의 대표 구현체
+
