@@ -1,4 +1,4 @@
-package thread.executor;
+package thread.executor.future;
 
 import static util.MyLogger.log;
 import static util.ThreadUtils.sleep;
