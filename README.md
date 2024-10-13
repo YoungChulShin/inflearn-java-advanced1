@@ -198,3 +198,23 @@ Future.get()을 호출하면
 Future를 잘못 사용하는 예
 - 호출하고 바로 대기하는 케이스
 
+주요 메서드
+- bool cancel (boolean mayInterruptIfRunning)
+   - 아직 완료되지 않은 작업을 취소한다. 
+   - mayInterruptIfRunning
+      - true: 작업이 실행중이라면 Thread.interrupt()를 통해서 작업을 중단한다. 
+      - false: 실행중이면 중단하지 않는다. 
+   - 취소 상태의 Future에 get()을 호출하면, CancellationException이 발생한다. 
+- isCancelled(): 취소 여부 확인
+- isDone(): 작업이 완료되었는지 확인. 예외나 취소도 true를 반영한다. 
+- get(): 작업이 완료될 때까지 대기하고, 완료되면 결과를 반환한다. 
+- get(long timeout, TimeUnit unit): 시간 초과되면 예외를 발생시킨다. 
+
+Future의 취소
+- cancel() 메서드로 처리할 수 있다. 
+- 공통으로 
+   - 상태가 `CANCELLED` 로 변경된다. 
+   - 따라서 get()을 호출하면 `CancellationException이`이 발생한다. 
+- mayInterruptIfRunning이
+   - true라면, 진행중인 작업을 종료시킨다. 작업 스레드에서는 `InterruptedException`이 발생한다. 
+   - false라면, 상태는 `CANCELLED`로 변경되는데 진행 중인 작업은 종료시키지 않고 계속 실행된다. 
