@@ -31,6 +31,7 @@ public class FutureCancelMain {
       log("Future State: " + future.state());
     } catch (CancellationException e) {
       log("Future는 이미 취소되었습니다");
+      log("Future State: " + future.state());
     } catch (ExecutionException | InterruptedException e) {
       e.printStackTrace();
     }

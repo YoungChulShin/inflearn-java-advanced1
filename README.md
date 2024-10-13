@@ -218,3 +218,9 @@ Future의 취소
 - mayInterruptIfRunning이
    - true라면, 진행중인 작업을 종료시킨다. 작업 스레드에서는 `InterruptedException`이 발생한다. 
    - false라면, 상태는 `CANCELLED`로 변경되는데 진행 중인 작업은 종료시키지 않고 계속 실행된다. 
+
+Future 예외 처리 
+- 작업 중인 스레드 내부에서 에러가 발생하면 future.get()을 할 때 `ExecutionException`이 발생한다.
+- `cause` 정보를 가져오면, 실제 예외 값을 확인할 수 있다. 
+- Future의 상태는 `FAILED`가 된다. 
+
