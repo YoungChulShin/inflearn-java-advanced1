@@ -179,3 +179,22 @@ Lock 인터페이스
 - ThreadPoolExecutor class 
    - ExecutorService의 대표 구현체
 
+### Future
+Future Interface
+- 작업의 미래 결과를 받을 수 있는 객체
+- 요청 스레드는 블로킹 되지 않고 필요한 작업을 할 수 있다.
+
+FutureTask 
+- Future의 구현체중 하나
+
+Callable
+- 응답 값을 반환하는 인터페이스
+- Exception을 throw 할 수 있다. Runnable은 throw 할 수 없다. 
+
+Future.get()을 호출하면 
+1. 완료 되었으면 리턴하고 
+2. 완료가 안되었으면 대기 한다. 완료되면 메인 Waiting 상태의 메인 스레드를 깨운다. 
+
+Future를 잘못 사용하는 예
+- 호출하고 바로 대기하는 케이스
+
