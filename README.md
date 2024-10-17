@@ -236,3 +236,13 @@ Future 예외 처리
 - bool awaitTermination(): 지정된 시간 동안 모든 작업이 완료될 때까지 대기한다. 블로킹.
 - close(): 자바 19부터 지원. shutDown()을 호출하고, 하루를 기다려도 작업이 완료되지 않으면 shutDownNow()를 호출한다. 
 
+### 스레드 풀 관리 
+스레드풀 속성
+- corePoolSize: 최소 풀 사이즈. 처음 시작은 0으로 처음부터 corePoolSize만큼 생성되어 있지는 않는다. 
+   - ThreadPoolExecutor#prestartAllCoreThreads()를 실행하면 처음부터 생성되게 할 수 있다. 
+- maxPoolSize: 최대 풀 사이즈. corePoolSize만큼 요청이 다 차면, Queue에 작업이 적재된다. Queue도 다 차면 maxPoolSize만큼 스레드가 생성된다. 
+- keepAliveSeconds: 초과 스레드가 유휴상태로 유지될 수 있는 시간. 해당 시간이 지나면 삭제된다. 
+- Queue: 대기 작업을 담을 큐.
+
+maxPoolSize만큼 작업이 다 찼다면
+- 추가로 들어오는 작업은 `RejectedExecutionException` 이 발생해서 처리되지 않는다. 
