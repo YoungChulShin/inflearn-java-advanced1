@@ -246,3 +246,28 @@ Future 예외 처리
 
 maxPoolSize만큼 작업이 다 찼다면
 - 추가로 들어오는 작업은 `RejectedExecutionException` 이 발생해서 처리되지 않는다. 
+
+스레드 풀 생성
+- newSingleThreadPool(): 단일 스레드
+- newFixedThreadPool(nThread): 고정 스레드풀
+   - 갑작스럽게 요청이 늘어날 경우에, Queue에 쌓이는 작업의 수가 계속 늘어날 수 있는 문제가 있다. 
+- newCachedThreadPool():
+   - 기본 스레드를 사용하지 않고, 60초 생존주기를 가진 초과 스레드만 사용한다. 
+   - 초과 스레드 수는 제한이 없다. 
+   - `SynchornousQueue`를 사용한다. 이 큐는 내부 저장 공간이 없어서 생산자의 작업을 소비자에게 바로 전달한다. 
+   - 사용자의 요청애 맞춘 스레드 수 변화.
+
+사용자 정의 풀 전략
+- 기본 스레드와 최대 스레드 수를 정의하고, 최대 스레드는 생존 시간을 정의한다. 
+- 대기 큐의 수를 정의해서 일정 수를 넘어가면 거절되도록 한다. 
+   ```java
+   ExecutorService es = new ThreadPoolExecutor(100, 200, 60, TimeUnit.SECONDS, new ArrayBlockingQueue<>(1000));
+   ```
+
+ThreadPoolExecutor 예외 정책
+- AbortPolicy: 기본 정책. RejectedExecutionException 발생
+- DiscardPolicy: 새로운 작업을 버린다. 
+- CallerRunsPolicy: 작업을 제출한 스레드가 대신해서 작업을 하도록 한다. 생산자 스레드가 작업을 대신하기 때문에 작업의 속도가 느려진다. 생산 속도를 느리게 조절할 수 있다. 
+- 사용자 정의 (RejectedExecutionHandler)
+
+
