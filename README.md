@@ -270,4 +270,38 @@ ThreadPoolExecutor 예외 정책
 - CallerRunsPolicy: 작업을 제출한 스레드가 대신해서 작업을 하도록 한다. 생산자 스레드가 작업을 대신하기 때문에 작업의 속도가 느려진다. 생산 속도를 느리게 조절할 수 있다. 
 - 사용자 정의 (RejectedExecutionHandler)
 
+## CompletableFuture
+인프런 `더 자바 8 강의` 메모.
 
+Future로 하기 어려웠던 작업
+- Future를 외부에서 완료시킬 수 없다. 취소하거나, get()에 타임아웃을 설정할 수는 있다. 
+- 블로킹 코드(get())를 사용하지 않고서는, 작업이 끝났을 때 콜백을 실행할 수 없다. 
+- 여러 Future를 조합할 수 없다. 
+- 예외 처리용 API를 제공하지 않는다. 
+
+CompletableFuture
+- 외부에서 Complete 시킬 수 있다. 
+- 메서드
+   - runAsync(): 리턴이 없는
+   - supplyAsync(): 리턴이 있는
+- 체이닝
+   - thenApply(): 리턴이 있는
+   - thenAccept(): 리턴이 없는
+   - thenRun(): 이전 결과값과 상관 없이 특정 작업을 수행할 때
+   ```java
+    CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+      System.out.println("Hello " + Thread.currentThread().getName());
+      return "Hello";
+    }).thenApply((s) -> {
+      System.out.println(Thread.currentThread().getName());
+      return s.toUpperCase();
+    });
+   ```
+
+스레드풀
+- 기본적으로는 ForkJoinPool의 commonPool을 사용한다. 
+- 만들어서 스레드를 지정해줄 수도 있다. 
+
+예외 처리
+- exceptionally: 예외 처리
+- handle: 정상 값과 예외를 각각 받아서 처리하는 방법
